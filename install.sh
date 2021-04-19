@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "Downloading appimage..."
+sudo wget -q --show-progress 'https://public.am.files.1drv.com/y4m50mnuQUSHFX3kMxaKbxtjR6UNucbHtHM7ey0ObXHa4D5K_9SN9JfI10xNkhyNjyexPnVaZnVXGQIvxaF8GUfdR3MfBIxAh2bPiMwI1c8Sis1m4Q-lpZrZvjYDahixVSWgGauTEZW_oKzsar9QVBRIheaZNlrhP2-mPjOtAA16Cp3gVGNl1yBrCfizHple1PIP3BmlXpWDd5b4ZdncI27quORquZe44qGr5WM-EsHhDY?access_token=EwAAA61DBAAUmcDj0azQ5tf1lkBfAvHLBzXl5ugAAXzsBvfn%2bxdSPTGxc/wpT7iSna3QWjClFNdcy5liyhUrXjFRTDJEE2Rlf8rjfMp89opL2FoPF%2b7j7ECMJDMvICKQkNpGVohoxkiWHcYGyU6OjIAjJkUjTgc2TionqfaJDhuMJeysMIQ1yA5BSd2sr14%2b2qQZfMxUGdZU12ab8slGBvCWniX1bh76mO9BYQCto2XtMJsxjl/UJ7fub64sgyXPQg49gkrVInBGSFhFu3KYTW0V1v0jZx/E7reGIctzruOMOAwK%2bUkkJ6Jyqf3Y3GzHDzpq4CG9LFEyP9LIbE4uov1hm%2bz00G/gw4X0r4CB8tco2Ir3MpO6sjco0oxejXIDZgAACJbsobMHjjYA0AHxUiM%2bdiUl/lnl/4qNw80WR6F3jHbzmpTtHPoKjZBIJrbYYq5HojmIPzAu3vPlLH3oEn26gJLanLG7V1aa6EoM/39e4LG1W39IMIIFT1892EQCV863prGvHyQx1oJ6QX7NZpxkE/cAVV/NSdiM6XdEd6ib5nfDlmComDGj8ZegGTCJVIoO5oUW8SpOpblhi4m%2bRTXRmefrk97SLxA1bsv65hcKv6%2bGG3ILLtRKNAJ9WZe5AYSGL7804h5MkX5vkIDVpVyG%2byp2wPhq97acjVLIjLUTL58j69tX9TTGu%2bMdj9ieyu87dpPuYH%2bf6xHftMMkp1%2bAANn7HYFdQbhrhKh1mVZY5d6JGLzK3E%2b6KJ9JMwnreBBInsaiIHThllFHUhPifnijJPqKI1mOy8P6aNmmQcHtFlttys/Vwcfg%2b6r6D4tZYtSF0Y5TNJeI/70XbhIWO8LHo7cLUMt8vv5/yTMq7ysONtuSEJaBbr5gDuzS5veM8CCTwKNA/YdzFiz8ZG5Ue7IcLA96DzHZS5dyFPcrbiuV0r36nREqbPY/LNDtHD7cJGvsLZUoZlEyHN7crzD1RXUyPtLKjy01uN0a1LQL5jysdorhXCuMo/f2bj/LIgsC' -O /usr/local/bin/scratch-packager
+sudo chmod +x /usr/local/bin/scratch-packager
+echo "Recuperating icon from appimage..." 
+x=$RANDOM
+mkdir /tmp/$x
+cd /tmp/$x
+scratch-packager --appimage-extract >/dev/null
+cd *
+mkdir -p ~/.local/share/icons
+cp icon.png ~/.local/share/icons/scratch-packager.png
+cd
+rm -r /tmp/$x
+echo "Creating desktop shortcut..."
+echo "[Desktop Entry]
+Type=Application
+Name=Scratch packager
+Exec=scratch-packager
+Icon=scratch-packager
+Description=Scratch and html packager for armhf raspberry pi">~/.local/share/applications/scratch-packager.desktop
